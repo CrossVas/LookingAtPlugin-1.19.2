@@ -68,9 +68,9 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                         BoxStyle boxStyle = JadeHelper.getStyle(ColorStyle.RED);
                         IProgressStyle progressStyle = JadeHelper.getProgressStyle(ColorStyle.RED);
                         Component text = Component.Serializer.fromJson(serverTag.getString("energyText"));
-                        tooltip.add(tooltip.getElementHelper().progress((float) current / max, text.copy().withStyle(JadeHelper.getFormattingStyle()), progressStyle, boxStyle, true));
+                        tooltip.add(tooltip.getElementHelper().progress((float) current / max, text, progressStyle, boxStyle, true));
                     } else {
-                        Component text = Component.translatable("ic2.probe.eu.storage.full.name", current, max).withStyle(ChatFormatting.GRAY);
+                        Component text = Component.translatable("ic2.probe.eu.storage.full.name", current, max);
                         IProgressStyle progressStyle = tooltip.getElementHelper().progressStyle().color(-5636096, -10092544);
                         tooltip.add(tooltip.getElementHelper().progress((float) current / max, text, progressStyle, BoxStyle.DEFAULT, true));
                     }

@@ -87,6 +87,7 @@ public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityCom
                     int max = serverTag.getInt(TagRefs.TAG_MAX);
                     Component label = Component.Serializer.fromJson(serverTag.getString("barText"));
                     tooltip.addLine(new CustomBarComponent((float) current / max, color, label));
+                    tooltip.addLine(new SpacingComponent(0, 1));
                 }
             }
         }
