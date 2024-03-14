@@ -13,7 +13,7 @@ public class WailaLookingAtHelper implements ILookingAtHelper {
     private final ListTag data = new ListTag();
 
     @Override
-    public void addItem(ItemStack stack, Component text, boolean removeHarvestInfo) {
+    public void addItemElement(ItemStack stack, Component text, boolean removeHarvestInfo) {
         CompoundTag stackData = new CompoundTag();
         CompoundTag stackTag = stack.save(new CompoundTag());
         stackTag.putString("stackText", Component.Serializer.toJson(text));
@@ -22,7 +22,7 @@ public class WailaLookingAtHelper implements ILookingAtHelper {
     }
 
     @Override
-    public void addText(Component text, boolean append) {
+    public void addTextElement(Component text, boolean append) {
         CompoundTag tag = new CompoundTag();
         tag.putString(TagRefs.TAG_TEXT, Component.Serializer.toJson(text));
         tag.putBoolean("append", append);
@@ -55,6 +55,14 @@ public class WailaLookingAtHelper implements ILookingAtHelper {
         fluidData.putInt(TagRefs.TAG_MAX, maxCapacity);
 //        fluidData.putString(TagRefs.TAG_TEXT, Component.Serializer.toJson(text));
         data.add(fluidData);
+    }
+
+    @Override
+    public void addPaddingElement(int x, int y) {
+        CompoundTag paddingTag = new CompoundTag();
+        paddingTag.putInt(TagRefs.TAG_PADDING, x);
+        paddingTag.putInt(TagRefs.TAG_PADDING_Y, y);
+        data.add(paddingTag);
     }
 
     @Override

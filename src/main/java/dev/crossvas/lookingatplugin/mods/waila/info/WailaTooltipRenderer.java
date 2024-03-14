@@ -89,6 +89,11 @@ public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityCom
                     tooltip.addLine(new CustomBarComponent((float) current / max, color, label));
                     tooltip.addLine(new SpacingComponent(0, 1));
                 }
+                if (serverTag.contains(TagRefs.TAG_PADDING)) {
+                    int paddingX = serverTag.getInt(TagRefs.TAG_PADDING);
+                    int paddingY = serverTag.getInt(TagRefs.TAG_PADDING_Y);
+                    tooltip.addLine(new SpacingComponent(paddingX, paddingY));
+                }
             }
         }
     }

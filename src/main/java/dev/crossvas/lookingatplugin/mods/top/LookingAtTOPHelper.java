@@ -28,17 +28,17 @@ public class LookingAtTOPHelper implements ILookingAtHelper {
     }
 
     @Override
-    public void addItem(ItemStack stack, Component text, boolean removeHarvestInfo) {
+    public void addItemElement(ItemStack stack, Component text, boolean removeHarvestInfo) {
         IElement harvestInfoElement = info.getElements().get(1);
         if (removeHarvestInfo) {
             info.getElements().remove(harvestInfoElement); // harvest tool
         }
-        info.horizontal().item(stack, new ItemStyle().height(15).width(15)).element(new ElementText(text, new TextStyle().topPadding(4)));
+        info.horizontal().item(stack, new ItemStyle().width(15)).element(new ElementText(text, new TextStyle().topPadding(5)));
         info.element(harvestInfoElement);
     }
 
     @Override
-    public void addText(Component text, boolean append) {
+    public void addTextElement(Component text, boolean append) {
         info.element(new ElementText(text, new TextStyle()));
     }
 
@@ -56,6 +56,11 @@ public class LookingAtTOPHelper implements ILookingAtHelper {
     public void addFluidElement(FluidStack fluid, int maxCapacity) {
         Component fluidComp = Component.translatable("ic2.barrel.info.fluid", fluid.getDisplayName(), Formatter.formatNumber(fluid.getAmount(), String.valueOf(fluid.getAmount()).length() - 1), Formatter.formatNumber(maxCapacity, String.valueOf(maxCapacity).length() - 1)).withStyle(ChatFormatting.WHITE);
         info.tank(new TankReference(maxCapacity, fluid.getAmount(), fluid), TOPBarStyles.tank(GuiHelper.getColorForFluid(fluid), fluidComp));
+    }
+
+    @Override
+    public void addPaddingElement(int x, int y) {
+        info.padding(x, y);
     }
 
     @Override

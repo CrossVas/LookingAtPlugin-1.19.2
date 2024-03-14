@@ -27,9 +27,9 @@ public enum WrenchableInfoProvider implements IInfoProvider {
                 if (actualRate > 0) {
                     if (handHeldStack.getItem() instanceof IWrenchTool tool) {
                         double dropChance = tool.getActualLoss(handHeldStack, wrenchableTile.getDropRate(player));
-                        helper.addItem(wrenchStack, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append("% ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)), true);
+                        helper.addItemElement(wrenchStack, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append("% ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)), true);
                     } else {
-                        helper.addItem(wrenchStack, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY), true);
+                        helper.addItemElement(wrenchStack, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY), true);
                     }
                 }
             }

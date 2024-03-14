@@ -12,4 +12,6 @@ public class TagRefs {
     public static final String TAG_INVENTORY = "inventory";
     public static final String TAG_BAR = "bar";
     public static final String TAG_BAR_COLOR = "bar_color";
+    public static final String TAG_PADDING = "padding";
+    public static final String TAG_PADDING_Y = "padding_y";
 }

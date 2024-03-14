@@ -24,16 +24,17 @@ public enum AdjustableTransformerInfoProvider implements IInfoProvider {
                 int energyPacket = transformer.energyPacket;
                 int packetCount = transformer.packetCount;
 
-                helper.addText(Component.translatable("ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier())), false);
-                helper.addText(Component.translatable("ic2.probe.eu.output.max.name", energyPacket), false);
-                helper.addText(Component.translatable("ic2.probe.transformer.packets.name", packetCount), false);
+                helper.addTextElement(Component.translatable("ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier())), false);
+                helper.addTextElement(Component.translatable("ic2.probe.eu.output.max.name", energyPacket), false);
+                helper.addTextElement(Component.translatable("ic2.probe.transformer.packets.name", packetCount), false);
 
                 EnergyContainer result = EnergyContainer.getContainer(transformer);
                 long averageOut = result.getAverageOut();
                 long packetsOut = result.getPacketsOut();
                 if (averageOut > 0) {
-                    helper.addText(Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA), false);
-                    helper.addText(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA), false);
+                    helper.addPaddingElement(0, 3);
+                    helper.addTextElement(Component.translatable("tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut)).withStyle(ChatFormatting.AQUA), false);
+                    helper.addTextElement(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetsOut)).withStyle(ChatFormatting.AQUA), false);
                 }
             }
         }

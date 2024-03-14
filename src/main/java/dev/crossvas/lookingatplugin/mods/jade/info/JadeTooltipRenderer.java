@@ -39,6 +39,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
 
     private void append(ITooltip tooltip, Accessor<?> accessor) {
         CompoundTag serverData = accessor.getServerData();
+        IElementHelper helper = tooltip.getElementHelper();
         if (serverData.contains(TagRefs.TAG_DATA, Tag.TAG_LIST)) {
             ListTag list = serverData.getList(TagRefs.TAG_DATA, Tag.TAG_COMPOUND);
             for (int i = 0; i < list.size(); i++) {
@@ -55,8 +56,8 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                 if (serverTag.contains(TagRefs.TAG_ITEM)) {
                     ItemStack stack = ItemStack.of(serverTag.getCompound(TagRefs.TAG_ITEM));
                     Component text = Component.Serializer.fromJson(serverTag.getCompound(TagRefs.TAG_ITEM).getString("stackText"));
-                    tooltip.add(tooltip.getElementHelper().spacer(0, 3));
-                    tooltip.add(tooltip.getElementHelper().item(stack).align(IElement.Align.LEFT).translate(new Vec2(-2, -5)));
+                    tooltip.add(helper.spacer(0, 3));
+                    tooltip.add(helper.item(stack).align(IElement.Align.LEFT).translate(new Vec2(-2, -5)));
                     if (text != null) {
                         tooltip.append(text);
                     }
@@ -68,10 +69,10 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                     if (JadeHelper.forceTopStyle()) {
                         BoxStyle boxStyle = JadeHelper.getStyle(ColorStyle.RED);
                         IProgressStyle progressStyle = JadeHelper.getProgressStyle(ColorStyle.RED);
-                        tooltip.add(tooltip.getElementHelper().progress((float) current / max, label, progressStyle, boxStyle, true));
+                        tooltip.add(helper.progress((float) current / max, label, progressStyle, boxStyle, true));
                     } else {
-                        IProgressStyle progressStyle = tooltip.getElementHelper().progressStyle().color(-5636096, -10092544);
-                        tooltip.add(tooltip.getElementHelper().progress((float) current / max, label, progressStyle, BoxStyle.DEFAULT, true));
+                        IProgressStyle progressStyle = helper.progressStyle().color(-5636096, -10092544);
+                        tooltip.add(helper.progress((float) current / max, label, progressStyle, BoxStyle.DEFAULT, true));
                     }
 
                 }
@@ -84,7 +85,6 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                     int max = serverTag.getInt(TagRefs.TAG_MAX);
                     if (fluid.getAmount() > 0) {
                         if (JadeHelper.forceTopStyle()) {
-                            IElementHelper helper = tooltip.getElementHelper();
                             IProgressStyle progressStyle = helper.progressStyle().overlay(helper.fluid(fluid));
                             tooltip.add(helper.progress((float) fluid.getAmount() / max, Component.translatable("ic2.barrel.info.fluid", fluid.getDisplayName(), Formatter.formatNumber(fluid.getAmount(), String.valueOf(fluid.getAmount()).length() - 1), Formatter.formatNumber(max, String.valueOf(max).length() - 1)).withStyle(JadeHelper.getFormattingStyle()), progressStyle,
                                     JadeHelper.getStyle(GuiHelper.getColorForFluid(fluid)), true));
@@ -97,7 +97,6 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                             } else {
                                 text = Component.translatable("jade.fluid", IDisplayHelper.get().stripColor(fluid.getDisplayName()), current);
                             }
-                            IElementHelper helper = tooltip.getElementHelper();
                             IProgressStyle progressStyle = helper.progressStyle().overlay(helper.fluid(fluid));
                             tooltip.add(helper.progress((float) fluid.getAmount() / max, text, progressStyle, BoxStyle.DEFAULT, true));
                         }
@@ -110,7 +109,12 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                     BoxStyle boxStyle = JadeHelper.forceTopStyle() ? JadeHelper.getStyle(color) : BoxStyle.DEFAULT;
                     IProgressStyle progressStyle = JadeHelper.forceTopStyle() ? JadeHelper.getProgressStyle(color) : new ProgressStyle().color(color, ColorUtils.darker(color));
                     Component label = Component.Serializer.fromJson(serverTag.getString("barText"));
-                    tooltip.add(tooltip.getElementHelper().progress((float) current / max, label, progressStyle, boxStyle, true));
+                    tooltip.add(helper.progress((float) current / max, label, progressStyle, boxStyle, true));
+                }
+                if (serverTag.contains(TagRefs.TAG_PADDING)) {
+                    int paddingX = serverTag.getInt(TagRefs.TAG_PADDING);
+                    int paddingY = serverTag.getInt(TagRefs.TAG_PADDING_Y);
+                    tooltip.add(helper.spacer(paddingX, paddingY));
                 }
             }
         }
