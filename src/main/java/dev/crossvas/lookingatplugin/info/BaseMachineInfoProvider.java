@@ -29,12 +29,12 @@ public enum BaseMachineInfoProvider implements IInfoProvider {
     public void addInfo(ILookingAtHelper helper, BlockEntity blockEntity, Player player) {
         if (canHandle(player)) {
             if (blockEntity instanceof BaseMachineTileEntity tile) {
-                helper.addTextElement(Component.translatable("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier())), ChatFormatting.WHITE, false);
-                helper.addTextElement(Component.translatable("ic2.probe.eu.max_in.name", tile.getMaxInput()), ChatFormatting.WHITE, false);
-                helper.addTextElement(Component.translatable("ic2.probe.eu.usage.name", tile.getEnergyPerTick()), ChatFormatting.WHITE, false);
+                simpleText(helper, false, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier()));
+                simpleText(helper, false, "ic2.probe.eu.max_in.name", tile.getMaxInput());
+                simpleText(helper, false, "ic2.probe.eu.usage.name", tile.getEnergyPerTick());
 
                 if (tile instanceof SlowGrinderTileEntity grinder) {
-                    helper.addTextElement(Component.translatable("ic2.probe.scrap.chance.name", Formatters.XP_FORMAT.format(grinder.getChance(0.25F) * 100.0F)), ChatFormatting.WHITE, false);
+                    simpleText(helper, false, "ic2.probe.scrap.chance.name", Formatters.XP_FORMAT.format(grinder.getChance(0.25F) * 100.0F));
                 }
 
                 if (tile instanceof RefineryTileEntity refinery) {

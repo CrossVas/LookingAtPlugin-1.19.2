@@ -10,7 +10,6 @@ import ic2.core.inventory.filter.IFilter;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.utils.helpers.Formatters;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
@@ -21,9 +20,9 @@ public enum BaseEnergyStorageInfoProvider implements IInfoProvider {
     public void addInfo(ILookingAtHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseEnergyStorageTileEntity energyStorage) {
-                helper.addTextElement(Component.translatable("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier())), ChatFormatting.WHITE, false);
-                helper.addTextElement(Component.translatable("ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getTier())), ChatFormatting.WHITE, false);
-                helper.addTextElement(Component.translatable("ic2.probe.eu.output.name", energyStorage.getProvidedEnergy()), ChatFormatting.WHITE, false);
+                simpleText(helper, false, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier()));
+                simpleText(helper, false, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getTier()));
+                simpleText(helper, false, "ic2.probe.eu.output.name", energyStorage.getProvidedEnergy());
 
                 EnergyContainer result = EnergyContainer.getContainer(energyStorage);
                 long averageIn = result.getAverageIn();
@@ -32,16 +31,16 @@ public enum BaseEnergyStorageInfoProvider implements IInfoProvider {
                 long packetsOut = result.getPacketsOut();
                 if (averageIn > 0 || averageOut > 0) {
                     if (averageIn > 0) {
-                        helper.addTextElement(Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long) averageIn)), ChatFormatting.AQUA, false);
+                        simpleText(helper, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long) averageIn));
                     }
                     if (averageOut > 0) {
-                        helper.addTextElement(Component.translatable("tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long) averageOut)), ChatFormatting.AQUA, false);
+                        simpleText(helper, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long) averageOut));
                     }
                     if (packetsIn > 0) {
-                        helper.addTextElement(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_READER_FORMAT.format((long) packetsIn)), ChatFormatting.AQUA, false);
+                        simpleText(helper, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_READER_FORMAT.format((long) packetsIn));
                     }
                     if (packetsOut > 0) {
-                        helper.addTextElement(Component.translatable("tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_READER_FORMAT.format((long) packetsOut)), ChatFormatting.AQUA, false);
+                        simpleText(helper, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_READER_FORMAT.format((long) packetsOut));
                     }
                 }
             }
