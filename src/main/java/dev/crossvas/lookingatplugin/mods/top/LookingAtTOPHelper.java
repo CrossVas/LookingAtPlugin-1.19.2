@@ -1,9 +1,9 @@
 package dev.crossvas.lookingatplugin.mods.top;
 
 import dev.crossvas.lookingatplugin.ILookingAtHelper;
+import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import dev.crossvas.lookingatplugin.helpers.Formatter;
 import dev.crossvas.lookingatplugin.helpers.GuiHelper;
-import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import dev.crossvas.lookingatplugin.mods.top.style.TOPBarStyles;
 import mcjty.theoneprobe.api.IElement;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -37,8 +37,9 @@ public class LookingAtTOPHelper implements ILookingAtHelper {
     }
 
     @Override
-    public void addTextElement(Component text, ChatFormatting formatting, boolean append) {
-        info.element(new ElementText(text.copy().withStyle(formatting), new TextStyle()));
+    public void addTextElement(Component text, ChatFormatting formatting, boolean append, boolean centered) {
+        IElement textElement = new ElementText(text.copy().withStyle(formatting), new TextStyle());
+        info.element(textElement);
     }
 
     @Override

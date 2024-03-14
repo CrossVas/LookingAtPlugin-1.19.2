@@ -23,17 +23,17 @@ public enum AdjustableTransformerInfoProvider implements IInfoProvider {
                 int energyPacket = transformer.energyPacket;
                 int packetCount = transformer.packetCount;
 
-                simpleText(helper, false, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier()));
-                simpleText(helper, false, "ic2.probe.eu.output.max.name", energyPacket);
-                simpleText(helper, false, "ic2.probe.transformer.packets.name", packetCount);
+                simpleText(helper, false, false, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(transformer.getSinkTier()));
+                simpleText(helper, false, false, "ic2.probe.eu.output.max.name", energyPacket);
+                simpleText(helper, false, false, "ic2.probe.transformer.packets.name", packetCount);
 
                 EnergyContainer result = EnergyContainer.getContainer(transformer);
                 long averageOut = result.getAverageOut();
                 long packetsOut = result.getPacketsOut();
                 if (averageOut > 0) {
                     helper.addPaddingElement(0, 3);
-                    simpleText(helper, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut));
-                    simpleText(helper, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetsOut));
+                    simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut));
+                    simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetsOut));
                 }
             }
         }

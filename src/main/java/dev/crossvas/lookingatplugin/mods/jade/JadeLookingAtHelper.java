@@ -23,11 +23,12 @@ public class JadeLookingAtHelper implements ILookingAtHelper {
     }
 
     @Override
-    public void addTextElement(Component text, ChatFormatting formatting, boolean append) {
+    public void addTextElement(Component text, ChatFormatting formatting, boolean append, boolean centered) {
         CompoundTag tag = new CompoundTag();
         tag.putString(TagRefs.TAG_TEXT, Component.Serializer.toJson(text));
         tag.putInt("formatting", formatting.getId());
         tag.putBoolean("append", append);
+        tag.putBoolean("center", centered);
         data.add(tag);
     }
 

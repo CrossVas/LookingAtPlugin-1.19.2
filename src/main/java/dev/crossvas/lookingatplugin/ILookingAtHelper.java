@@ -9,7 +9,7 @@ import net.minecraftforge.fluids.FluidStack;
 public interface ILookingAtHelper {
 
     void addItemElement(ItemStack stack, Component component, boolean removeHarvestInfo);
-    void addTextElement(Component text, ChatFormatting formatting, boolean append);
+    void addTextElement(Component text, ChatFormatting formatting, boolean append, boolean centered);
     void addEnergyElement(int currentEnergy, int maxEnergy, Component text);
     void addBarElement(int current, int max, Component text, int color);
     void addFluidElement(FluidStack stored, int maxCapacity);

@@ -23,6 +23,7 @@ public class LookingAtCommon {
         INFO_PROVIDERS.add(BaseMachineInfoProvider.THIS);
         INFO_PROVIDERS.add(AdjustableTransformerInfoProvider.THIS);
         INFO_PROVIDERS.add(BaseEnergyStorageInfoProvider.THIS);
+        INFO_PROVIDERS.add(BarrelInfoProvider.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfoProvider.THIS); // keep last
     }

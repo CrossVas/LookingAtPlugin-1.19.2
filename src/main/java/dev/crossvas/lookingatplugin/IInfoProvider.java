@@ -17,11 +17,11 @@ public interface IInfoProvider {
         return StackUtil.hasHotbarItems(player, getFilter());
     }
 
-    default void simpleText(ILookingAtHelper helper, boolean append, String text, Object... args) {
-        helper.addTextElement(Component.translatable(text, args), ChatFormatting.WHITE, append);
+    default void simpleText(ILookingAtHelper helper, boolean append, boolean centered, String text, Object... args) {
+        helper.addTextElement(Component.translatable(text, args), ChatFormatting.WHITE, append, centered);
     }
 
-    default void simpleText(ILookingAtHelper helper, boolean append, ChatFormatting formatting, String text, Object... args) {
-        helper.addTextElement(Component.translatable(text, args), formatting, append);
+    default void simpleText(ILookingAtHelper helper, boolean append, boolean centered, ChatFormatting formatting, String text, Object... args) {
+        helper.addTextElement(Component.translatable(text, args), formatting, append, centered);
     }
 }
