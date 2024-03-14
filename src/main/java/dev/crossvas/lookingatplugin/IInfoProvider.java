@@ -18,14 +18,50 @@ public interface IInfoProvider {
     }
 
     default void text(ILookingAtHelper helper, String text, Object... args) {
-        this.simpleText(helper, false, false, text, args);
+        helper.addTextElement(Component.translatable(text, args), ChatFormatting.WHITE, false, false);
     }
 
-    default void simpleText(ILookingAtHelper helper, boolean append, boolean centered, String text, Object... args) {
+    default void centeredText(ILookingAtHelper helper, String text, Object... args) {
+        helper.addTextElement(Component.translatable(text, args), ChatFormatting.WHITE, false, true);
+    }
+
+    default void appendText(ILookingAtHelper helper, String text, Object... args) {
+        helper.addTextElement(Component.translatable(text, args), ChatFormatting.WHITE, true, false);
+    }
+
+    default void text(ILookingAtHelper helper, boolean append, boolean centered, String text, Object... args) {
         helper.addTextElement(Component.translatable(text, args), ChatFormatting.WHITE, append, centered);
     }
 
-    default void simpleText(ILookingAtHelper helper, boolean append, boolean centered, ChatFormatting formatting, String text, Object... args) {
+    default void text(ILookingAtHelper helper, ChatFormatting formatting, String text, Object... args) {
+        helper.addTextElement(Component.translatable(text, args), formatting, false, false);
+    }
+
+    default void centeredText(ILookingAtHelper helper, ChatFormatting formatting, String text, Object... args) {
+        helper.addTextElement(Component.translatable(text, args), formatting, false, true);
+    }
+
+    default void appendText(ILookingAtHelper helper, ChatFormatting formatting, String text, Object... args) {
+        helper.addTextElement(Component.translatable(text, args), formatting, true, false);
+    }
+
+    default void text(ILookingAtHelper helper, boolean append, boolean centered, ChatFormatting formatting, String text, Object... args) {
         helper.addTextElement(Component.translatable(text, args), formatting, append, centered);
+    }
+
+    default void text(ILookingAtHelper helper, Component text) {
+        helper.addTextElement(text, ChatFormatting.WHITE, false, false);
+    }
+
+    default void centeredText(ILookingAtHelper helper, Component text) {
+        helper.addTextElement(text, ChatFormatting.WHITE, false, true);
+    }
+
+    default void appendText(ILookingAtHelper helper, Component text) {
+        helper.addTextElement(text, ChatFormatting.WHITE, true, false);
+    }
+
+    default void text(ILookingAtHelper helper, boolean append, boolean centered, Component text) {
+        helper.addTextElement(text, ChatFormatting.WHITE, append, centered);
     }
 }

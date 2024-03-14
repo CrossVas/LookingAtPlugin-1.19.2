@@ -43,7 +43,7 @@ public enum BatteryStationInfoProvider implements IInfoProvider {
 
                 if (missingEnergy > 0) {
                     int chargeEnergy = (int) Math.min(maxTransfer, missingEnergy);
-                    simpleText(helper, false, false, ChatFormatting.GOLD, "ic2.probe.chargingBench.eta.name",
+                    text(helper, false, false, ChatFormatting.GOLD, "ic2.probe.chargingBench.eta.name",
                             DurationFormatUtils.formatDuration(chargeEnergy <= 0 ? 0L : (missingEnergy / chargeEnergy * 50L), "HH:mm:ss"));
                 }
                 if (capacity > 0) {
@@ -56,8 +56,8 @@ public enum BatteryStationInfoProvider implements IInfoProvider {
                 int packetsOut = result.getPacketsOut();
                 if (averageOut > 0) {
                     helper.addPaddingElement(0, 3);
-                    simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut));
-                    simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut));
+                    text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format(averageOut));
+                    text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_FORMAT.format(packetsOut));
                 }
             }
         }

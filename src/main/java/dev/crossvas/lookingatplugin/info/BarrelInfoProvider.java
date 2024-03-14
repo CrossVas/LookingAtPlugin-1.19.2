@@ -60,12 +60,12 @@ public enum BarrelInfoProvider implements IInfoProvider {
                     current = age / maxValue * 100.0;
 
                     text(helper, getBrewType(brewType));
-                    simpleText(helper, false, true, ChatFormatting.YELLOW, "ic2.probe.barrel.status.storage.name");
+                    centeredText(helper, ChatFormatting.YELLOW, "ic2.probe.barrel.status.storage.name");
                     helper.addBarElement(wheatAmount, 64, Component.translatable("ic2.probe.barrel.beer.wheat.name", wheatAmount), ColorStyle.YELLOW.aColor);
                     helper.addBarElement(hopsAmount, 64, Component.translatable("ic2.probe.barrel.beer.hops.name", hopsAmount), ColorStyle.GREEN.aColor);
                     helper.addFluidElement(waterStack, maxFluidCapacity);
 
-                    simpleText(helper, false, true, ChatFormatting.YELLOW, "ic2.probe.barrel.status.brew.name");
+                    centeredText(helper, ChatFormatting.YELLOW, "ic2.probe.barrel.status.brew.name");
                     helper.addBarElement(brewQuality, 5, Component.translatable("ic2.probe.barrel.beer.quality." + brewQuality + ".name"), ColorStyle.BLUE.aColor);
                     helper.addBarElement(alcoholLevel, 6, Component.translatable("ic2.probe.barrel.beer.alc." + alcoholLevel + ".name"), ColorStyle.GREEN.aColor);
                     helper.addBarElement(solidRatio, 6, Component.translatable("ic2.probe.barrel.beer.solid." + solidRatio + ".name"), ColorStyle.YELLOW.aColor);
@@ -75,7 +75,7 @@ public enum BarrelInfoProvider implements IInfoProvider {
                     maxValue = barrelTile.timeNeededForRum();
                     age = (int) Math.min(barrelTile.age, maxValue);
                     text(helper, getBrewType(brewType));
-                    simpleText(helper, false, true, ChatFormatting.YELLOW,"ic2.probe.barrel.status.brew.name");
+                    centeredText(helper, ChatFormatting.YELLOW,"ic2.probe.barrel.status.brew.name");
                     helper.addBarElement(fluidAmount / 1000, 32, Component.translatable("ic2.probe.barrel.beer.sugar_cane.name", fluidAmount / 1000), ColorStyle.GREEN.aColor);
                     helper.addBarElement(age, (int) maxValue, Component.literal(format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%"), ColorStyle.BLUE.aColor);
                     break;
@@ -83,20 +83,20 @@ public enum BarrelInfoProvider implements IInfoProvider {
                     double ageWhisky = barrelTile.age;
                     int whiskyBrewTime = barrelTile.getWhiskBrewTime();
                     text(helper, getBrewType(brewType));
-                    simpleText(helper, false, true, ChatFormatting.YELLOW, "ic2.probe.barrel.status.storage.name");
+                    centeredText(helper, ChatFormatting.YELLOW, "ic2.probe.barrel.status.storage.name");
                     helper.addBarElement(hopsAmount, 16, Component.translatable("ic2.probe.barrel.whisky.grist.name", hopsAmount), ColorStyle.GREEN.aColor);
                     helper.addFluidElement(waterStack, maxFluidCapacity);
-                    simpleText(helper, false, true, ChatFormatting.YELLOW, "ic2.probe.barrel.status.brew.name");
+                    centeredText(helper, ChatFormatting.YELLOW, "ic2.probe.barrel.status.brew.name");
                     helper.addBarElement(Math.min(brewQuality, 50), 50, Component.translatable("ic2.probe.barrel.whisky.years.name", Math.min(brewQuality, 50)), ColorStyle.BLUE.aColor);
                     helper.addBarElement((int) ageWhisky, 1728000, Component.literal(format.format(ageWhisky / (whiskyBrewTime / 100.0)) + "%"), ColorStyle.BLUE.aColor);
                     break;
                 case 10:
                     text(helper, getBrewType(brewType));
-                    simpleText(helper, false, true, ChatFormatting.YELLOW, "ic2.probe.barrel.status.storage.name");
+                    centeredText(helper, ChatFormatting.YELLOW, "ic2.probe.barrel.status.storage.name");
                     helper.addBarElement(wheatAmount, 20, Component.translatable("ic2.probe.barrel.beer.redstone.name", wheatAmount), ColorStyle.RED.aColor);
                     helper.addBarElement(hopsAmount, 20, Component.translatable("ic2.probe.barrel.beer.glowstone.name", hopsAmount), ColorStyle.YELLOW.aColor);
                     helper.addFluidElement(waterStack, maxPotionCapacity);
-                    simpleText(helper, false, true, ChatFormatting.YELLOW, "ic2.probe.barrel.status.brew.name");
+                    centeredText(helper, ChatFormatting.YELLOW, "ic2.probe.barrel.status.brew.name");
                     int brewedPotion = MobEffect.getId(barrelTile.potionType);
                     Component potionID = brewedPotion == -1 ? Component.translatable("tooltip.block.ic2.barrel.unknown") : barrelTile.potionType.getDisplayName();
                     text(helper, "ic2.probe.barrel.status.output.name", potionID);

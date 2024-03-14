@@ -32,8 +32,8 @@ public enum AdjustableTransformerInfoProvider implements IInfoProvider {
                 long packetsOut = result.getPacketsOut();
                 if (averageOut > 0) {
                     helper.addPaddingElement(0, 3);
-                    simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut));
-                    simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetsOut));
+                    text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow", Formatters.EU_FORMAT.format(averageOut));
+                    text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow", Formatters.EU_FORMAT.format(packetsOut));
                 }
             }
         }

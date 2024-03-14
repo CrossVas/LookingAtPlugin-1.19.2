@@ -27,10 +27,10 @@ public enum BaseTeleporterInfoProvider implements IInfoProvider {
                 String name = tp.name;
                 String networkID = tp.networkID;
                 if (!targets.isEmpty()) {
-                    text(helper, Component.translatable("gui.ic2.base_teleporter.name").append(": ").append(name).getString());
-                    text(helper, Component.translatable("gui.ic2.base_teleporter.network").append(": ").append(networkID).getString());
+                    text(helper, Component.translatable("gui.ic2.base_teleporter.name").append(": ").append(name));
+                    text(helper, Component.translatable("gui.ic2.base_teleporter.network").append(": ").append(networkID));
                     helper.addPaddingElement(0, 3);
-                    simpleText(helper, false, false, ChatFormatting.GOLD, "ic2.probe.base_teleporter.connections");
+                    text(helper, false, false, ChatFormatting.GOLD, "ic2.probe.base_teleporter.connections");
                     for (BaseTeleporterTileEntity.LocalTarget target : targets) {
                         if (!target.getPos().equals(tp.getPosition())) {
                             text(helper, Component.literal(" - " + target.getName()).getString());

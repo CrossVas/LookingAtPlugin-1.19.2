@@ -31,16 +31,16 @@ public enum BaseEnergyStorageInfoProvider implements IInfoProvider {
                 long packetsOut = result.getPacketsOut();
                 if (averageIn > 0 || averageOut > 0) {
                     if (averageIn > 0) {
-                        simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long) averageIn));
+                        text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long) averageIn));
                     }
                     if (averageOut > 0) {
-                        simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long) averageOut));
+                        text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_out", Formatters.EU_FORMAT.format((long) averageOut));
                     }
                     if (packetsIn > 0) {
-                        simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_READER_FORMAT.format((long) packetsIn));
+                        text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow_in", Formatters.EU_READER_FORMAT.format((long) packetsIn));
                     }
                     if (packetsOut > 0) {
-                        simpleText(helper, false, false, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_READER_FORMAT.format((long) packetsOut));
+                        text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.packet_flow_out", Formatters.EU_READER_FORMAT.format((long) packetsOut));
                     }
                 }
             }
