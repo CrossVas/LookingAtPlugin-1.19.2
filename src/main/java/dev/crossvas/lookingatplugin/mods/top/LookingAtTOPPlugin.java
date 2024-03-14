@@ -2,6 +2,7 @@ package dev.crossvas.lookingatplugin.mods.top;
 
 import dev.crossvas.lookingatplugin.LookingAt;
 import dev.crossvas.lookingatplugin.LookingAtCommon;
+import dev.crossvas.lookingatplugin.mods.top.info.CropIconProvider;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -15,6 +16,7 @@ public class LookingAtTOPPlugin implements IProbeInfoProvider, Function<ITheOneP
     @Override
     public Void apply(ITheOneProbe probe) {
         probe.registerProvider(this);
+        probe.registerBlockDisplayOverride(new CropIconProvider());
         return null;
     }
 
