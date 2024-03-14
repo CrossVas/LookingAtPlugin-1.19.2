@@ -79,7 +79,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                 if (serverTag.contains(TagRefs.TAG_FLUID)) {
                     if (accessor instanceof BlockAccessor blockAccessor) {
                         Block block = blockAccessor.getBlock();
-                        TankInfoRemover.TANK_REMOVAL.add(block);
+                        JadeTankInfoRemover.TANK_REMOVAL.add(block);
                     }
                     FluidStack fluid = FluidStack.loadFluidStackFromNBT(serverTag.getCompound(TagRefs.TAG_FLUID));
                     int max = serverTag.getInt(TagRefs.TAG_MAX);

@@ -12,7 +12,7 @@ import snownee.jade.api.config.IPluginConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum TankInfoRemover implements IBlockComponentProvider {
+public enum JadeTankInfoRemover implements IBlockComponentProvider {
     INSTANCE;
 
     public static final ResourceLocation FORGE_FLUID = new ResourceLocation("fluid");

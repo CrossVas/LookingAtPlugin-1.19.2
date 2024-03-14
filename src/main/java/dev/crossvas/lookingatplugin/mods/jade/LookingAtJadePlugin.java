@@ -3,7 +3,7 @@ package dev.crossvas.lookingatplugin.mods.jade;
 import dev.crossvas.lookingatplugin.LookingAt;
 import dev.crossvas.lookingatplugin.mods.jade.info.JadeBlockEntityDataProvider;
 import dev.crossvas.lookingatplugin.mods.jade.info.JadeTooltipRenderer;
-import dev.crossvas.lookingatplugin.mods.jade.info.TankInfoRemover;
+import dev.crossvas.lookingatplugin.mods.jade.info.JadeTankInfoRemover;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,7 +23,7 @@ public class LookingAtJadePlugin implements IWailaPlugin {
         r.addConfig(TOP_STYLE, true);
         r.addConfig(TANK_RENDER, true);
         r.registerBlockComponent(JadeTooltipRenderer.INSTANCE, Block.class);
-        r.registerBlockComponent(TankInfoRemover.INSTANCE, Block.class);
+        r.registerBlockComponent(JadeTankInfoRemover.INSTANCE, Block.class);
     }
 
     @Override
