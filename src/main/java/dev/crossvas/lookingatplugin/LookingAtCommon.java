@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
@@ -17,6 +18,7 @@ import java.util.List;
 public class LookingAtCommon {
 
     public static List<IInfoProvider> INFO_PROVIDERS = new ObjectArrayList<>();
+    public static final List<Block> TANK_REMOVAL = new ObjectArrayList<>();
 
     static {
         INFO_PROVIDERS.add(EUStorageInfoProvider.THIS);
@@ -24,6 +26,7 @@ public class LookingAtCommon {
         INFO_PROVIDERS.add(AdjustableTransformerInfoProvider.THIS);
         INFO_PROVIDERS.add(BaseEnergyStorageInfoProvider.THIS);
         INFO_PROVIDERS.add(BarrelInfoProvider.THIS);
+        INFO_PROVIDERS.add(BaseGeneratorInfoProvider.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfoProvider.THIS); // keep last
     }
@@ -48,6 +51,7 @@ public class LookingAtCommon {
     }
 
     public static void addTankInfo(ILookingAtHelper helper, BlockEntity blockEntity) {
+        TANK_REMOVAL.add(blockEntity.getBlockState().getBlock());
         if (blockEntity instanceof IFluidHandler fluidHandler) {
             loadTankData(helper, fluidHandler);
         } else {

@@ -1,5 +1,6 @@
 package dev.crossvas.lookingatplugin.mods.jade.info;
 
+import dev.crossvas.lookingatplugin.LookingAtCommon;
 import dev.crossvas.lookingatplugin.TagRefs;
 import dev.crossvas.lookingatplugin.helpers.Formatter;
 import dev.crossvas.lookingatplugin.helpers.GuiHelper;
@@ -88,7 +89,7 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                 if (serverTag.contains(TagRefs.TAG_FLUID)) {
                     if (accessor instanceof BlockAccessor blockAccessor) {
                         Block block = blockAccessor.getBlock();
-                        JadeTankInfoRemover.TANK_REMOVAL.add(block);
+                        LookingAtCommon.TANK_REMOVAL.add(block);
                     }
                     FluidStack fluid = FluidStack.loadFluidStackFromNBT(serverTag.getCompound(TagRefs.TAG_FLUID));
                     int max = serverTag.getInt(TagRefs.TAG_MAX);

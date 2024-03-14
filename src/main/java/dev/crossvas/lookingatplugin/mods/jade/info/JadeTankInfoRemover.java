@@ -1,5 +1,6 @@
 package dev.crossvas.lookingatplugin.mods.jade.info;
 
+import dev.crossvas.lookingatplugin.LookingAtCommon;
 import dev.crossvas.lookingatplugin.mods.jade.LookingAtJadePlugin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -16,11 +17,10 @@ public enum JadeTankInfoRemover implements IBlockComponentProvider {
     INSTANCE;
 
     public static final ResourceLocation FORGE_FLUID = new ResourceLocation("fluid");
-    public static final List<Block> TANK_REMOVAL = new ArrayList<>();
 
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        if (TANK_REMOVAL.contains(blockAccessor.getBlock())) {
+        if (LookingAtCommon.TANK_REMOVAL.contains(blockAccessor.getBlock())) {
             iTooltip.remove(FORGE_FLUID);
         }
     }

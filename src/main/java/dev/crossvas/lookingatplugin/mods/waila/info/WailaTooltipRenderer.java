@@ -1,5 +1,6 @@
 package dev.crossvas.lookingatplugin.mods.waila.info;
 
+import dev.crossvas.lookingatplugin.LookingAtCommon;
 import dev.crossvas.lookingatplugin.TagRefs;
 import dev.crossvas.lookingatplugin.elements.AbstractItemStackElement;
 import dev.crossvas.lookingatplugin.helpers.ColorStyle;
@@ -74,7 +75,7 @@ public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityCom
                     tooltip.addLine(new SpacingComponent(0, 1));
                 }
                 if (serverTag.contains(TagRefs.TAG_FLUID)) {
-                    WailaTankInfoRemover.TANK_REMOVAL.add(accessor.getBlock());
+                    LookingAtCommon.TANK_REMOVAL.add(accessor.getBlock());
                     FluidStack fluid = FluidStack.loadFluidStackFromNBT(serverTag.getCompound(TagRefs.TAG_FLUID));
                     int max = serverTag.getInt(TagRefs.TAG_MAX);
                     if (!fluid.isEmpty()) {
