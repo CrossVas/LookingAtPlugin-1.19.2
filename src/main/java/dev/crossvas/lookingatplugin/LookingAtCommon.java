@@ -28,6 +28,7 @@ public class LookingAtCommon {
         INFO_PROVIDERS.add(BarrelInfoProvider.THIS);
         INFO_PROVIDERS.add(BaseGeneratorInfoProvider.THIS);
         INFO_PROVIDERS.add(BaseMultiblockMachineInfoProvider.THIS);
+        INFO_PROVIDERS.add(BaseTeleporterInfoProvider.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfoProvider.THIS); // keep last
     }
