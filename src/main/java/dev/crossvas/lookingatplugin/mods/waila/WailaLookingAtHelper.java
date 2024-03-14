@@ -2,6 +2,7 @@ package dev.crossvas.lookingatplugin.mods.waila;
 
 import dev.crossvas.lookingatplugin.ILookingAtHelper;
 import dev.crossvas.lookingatplugin.TagRefs;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -22,9 +23,10 @@ public class WailaLookingAtHelper implements ILookingAtHelper {
     }
 
     @Override
-    public void addTextElement(Component text, boolean append) {
+    public void addTextElement(Component text, ChatFormatting formatting, boolean append) {
         CompoundTag tag = new CompoundTag();
         tag.putString(TagRefs.TAG_TEXT, Component.Serializer.toJson(text));
+        tag.putInt("formatting", formatting.getId());
         tag.putBoolean("append", append);
         data.add(tag);
     }

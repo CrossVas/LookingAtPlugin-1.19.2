@@ -3,7 +3,7 @@ package dev.crossvas.lookingatplugin.mods.waila.info;
 import dev.crossvas.lookingatplugin.TagRefs;
 import dev.crossvas.lookingatplugin.elements.AbstractItemStackElement;
 import dev.crossvas.lookingatplugin.helpers.Formatter;
-import dev.crossvas.lookingatplugin.mods.jade.style.ColorStyle;
+import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import dev.crossvas.lookingatplugin.mods.waila.elements.CustomBarComponent;
 import dev.crossvas.lookingatplugin.mods.waila.elements.WailaStackComponent;
 import mcp.mobius.waila.api.*;
@@ -11,6 +11,7 @@ import mcp.mobius.waila.api.component.PairComponent;
 import mcp.mobius.waila.api.component.SpacingComponent;
 import mcp.mobius.waila.api.component.SpriteBarComponent;
 import mcp.mobius.waila.api.component.WrappedComponent;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.nbt.CompoundTag;
@@ -39,14 +40,16 @@ public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityCom
     }
 
     private void append(ITooltip tooltip, IBlockAccessor accessor) {
-        CompoundTag serverData = accessor.getServerData();
+        CompoundTag serverData = accessor.getData().raw();
         if (serverData.contains(TagRefs.TAG_DATA, Tag.TAG_LIST)) {
             ListTag list = serverData.getList(TagRefs.TAG_DATA, Tag.TAG_COMPOUND);
             for (int i = 0; i < list.size(); i++) {
                 CompoundTag serverTag = list.getCompound(i);
                 if (serverTag.contains(TagRefs.TAG_TEXT, Tag.TAG_STRING)) {
-                    Component text = Component.Serializer.fromJson(serverTag.getString(TagRefs.TAG_TEXT));
                     boolean append = serverTag.getBoolean("append");
+                    ChatFormatting formatting = ChatFormatting.getById(serverTag.getInt("formatting"));
+                    ChatFormatting textFormatting = formatting == ChatFormatting.WHITE ? ChatFormatting.GRAY : formatting;
+                    Component text = Component.Serializer.fromJson(serverTag.getString(TagRefs.TAG_TEXT)).withStyle(textFormatting);
                     if (append) {
                         tooltip.getLine(tooltip.getLineCount() - 1).with(text);
                     } else {

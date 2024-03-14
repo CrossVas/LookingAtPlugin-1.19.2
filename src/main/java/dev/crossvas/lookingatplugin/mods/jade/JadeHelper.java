@@ -2,7 +2,7 @@ package dev.crossvas.lookingatplugin.mods.jade;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.crossvas.lookingatplugin.mods.jade.style.ColorStyle;
+import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import dev.crossvas.lookingatplugin.mods.jade.style.SpecialBoxStyle;
 import dev.crossvas.lookingatplugin.mods.jade.style.SpecialProgressStyle;
 import ic2.core.utils.math.ColorUtils;

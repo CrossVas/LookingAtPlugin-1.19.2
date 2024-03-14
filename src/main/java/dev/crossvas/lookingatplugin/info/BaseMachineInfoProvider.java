@@ -3,7 +3,7 @@ package dev.crossvas.lookingatplugin.info;
 import dev.crossvas.lookingatplugin.IInfoProvider;
 import dev.crossvas.lookingatplugin.ILookingAtHelper;
 import dev.crossvas.lookingatplugin.LookingAtCommon;
-import dev.crossvas.lookingatplugin.mods.jade.style.ColorStyle;
+import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import ic2.api.energy.EnergyNet;
 import ic2.core.block.base.tiles.impls.machine.single.BaseAdvMachineTileEntity;
 import ic2.core.block.base.tiles.impls.machine.single.BaseMachineTileEntity;
@@ -23,18 +23,18 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import java.text.DecimalFormat;
 
 public enum BaseMachineInfoProvider implements IInfoProvider {
-    INSTANCE;
+    THIS;
 
     @Override
     public void addInfo(ILookingAtHelper helper, BlockEntity blockEntity, Player player) {
         if (canHandle(player)) {
             if (blockEntity instanceof BaseMachineTileEntity tile) {
-                helper.addTextElement(Component.translatable("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier())), false);
-                helper.addTextElement(Component.translatable("ic2.probe.eu.max_in.name", tile.getMaxInput()), false);
-                helper.addTextElement(Component.translatable("ic2.probe.eu.usage.name", tile.getEnergyPerTick()), false);
+                helper.addTextElement(Component.translatable("ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(tile.getTier())), ChatFormatting.WHITE, false);
+                helper.addTextElement(Component.translatable("ic2.probe.eu.max_in.name", tile.getMaxInput()), ChatFormatting.WHITE, false);
+                helper.addTextElement(Component.translatable("ic2.probe.eu.usage.name", tile.getEnergyPerTick()), ChatFormatting.WHITE, false);
 
                 if (tile instanceof SlowGrinderTileEntity grinder) {
-                    helper.addTextElement(Component.translatable("ic2.probe.scrap.chance.name", Formatters.XP_FORMAT.format(grinder.getChance(0.25F) * 100.0F)), false);
+                    helper.addTextElement(Component.translatable("ic2.probe.scrap.chance.name", Formatters.XP_FORMAT.format(grinder.getChance(0.25F) * 100.0F)), ChatFormatting.WHITE, false);
                 }
 
                 if (tile instanceof RefineryTileEntity refinery) {

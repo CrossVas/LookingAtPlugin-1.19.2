@@ -1,6 +1,6 @@
 package dev.crossvas.lookingatplugin.elements;
 
-import dev.crossvas.lookingatplugin.mods.jade.style.ColorStyle;
+import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import net.minecraft.network.chat.Component;
 
 public class EnergyElement extends AbstractBarElement {

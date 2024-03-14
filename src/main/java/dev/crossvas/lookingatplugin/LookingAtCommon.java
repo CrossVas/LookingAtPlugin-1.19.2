@@ -1,9 +1,6 @@
 package dev.crossvas.lookingatplugin;
 
-import dev.crossvas.lookingatplugin.info.AdjustableTransformerInfoProvider;
-import dev.crossvas.lookingatplugin.info.BaseMachineInfoProvider;
-import dev.crossvas.lookingatplugin.info.EUStorageInfoProvider;
-import dev.crossvas.lookingatplugin.info.WrenchableInfoProvider;
+import dev.crossvas.lookingatplugin.info.*;
 import ic2.core.block.base.features.multiblock.IStructureListener;
 import ic2.core.platform.events.StructureManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -22,11 +19,12 @@ public class LookingAtCommon {
     public static List<IInfoProvider> INFO_PROVIDERS = new ObjectArrayList<>();
 
     static {
-        INFO_PROVIDERS.add(EUStorageInfoProvider.INSTANCE);
-        INFO_PROVIDERS.add(BaseMachineInfoProvider.INSTANCE);
-        INFO_PROVIDERS.add(AdjustableTransformerInfoProvider.INSTANCE);
+        INFO_PROVIDERS.add(EUStorageInfoProvider.THIS);
+        INFO_PROVIDERS.add(BaseMachineInfoProvider.THIS);
+        INFO_PROVIDERS.add(AdjustableTransformerInfoProvider.THIS);
+        INFO_PROVIDERS.add(BaseEnergyStorageInfoProvider.THIS);
 
-        INFO_PROVIDERS.add(WrenchableInfoProvider.INSTANCE); // keep last
+        INFO_PROVIDERS.add(WrenchableInfoProvider.THIS); // keep last
     }
 
     public static BlockEntity getMultiBlockController(Level level, BlockPos pos) {

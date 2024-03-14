@@ -2,7 +2,7 @@ package dev.crossvas.lookingatplugin.elements;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.crossvas.lookingatplugin.helpers.TextHelper;
-import dev.crossvas.lookingatplugin.mods.jade.style.ColorStyle;
+import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;

@@ -1,4 +1,4 @@
-package dev.crossvas.lookingatplugin.mods.jade.style;
+package dev.crossvas.lookingatplugin.helpers;
 
 import ic2.core.utils.math.ColorUtils;
 

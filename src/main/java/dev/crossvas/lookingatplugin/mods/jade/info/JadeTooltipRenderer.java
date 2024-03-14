@@ -5,7 +5,7 @@ import dev.crossvas.lookingatplugin.helpers.Formatter;
 import dev.crossvas.lookingatplugin.helpers.GuiHelper;
 import dev.crossvas.lookingatplugin.mods.jade.JadeHelper;
 import dev.crossvas.lookingatplugin.mods.jade.JadeRefs;
-import dev.crossvas.lookingatplugin.mods.jade.style.ColorStyle;
+import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import ic2.core.utils.math.ColorUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -47,10 +47,12 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                 if (serverTag.contains(TagRefs.TAG_TEXT, Tag.TAG_STRING)) {
                     Component text = Component.Serializer.fromJson(serverTag.getString(TagRefs.TAG_TEXT));
                     boolean append = serverTag.getBoolean("append");
+                    ChatFormatting formatting = ChatFormatting.getById(serverTag.getInt("formatting"));
+                    ChatFormatting textFormatting = formatting == ChatFormatting.WHITE ? JadeHelper.getFormattingStyle() : formatting;
                     if (append) {
-                        tooltip.append(text.copy().withStyle(JadeHelper.getFormattingStyle()));
+                        tooltip.append(text.copy().withStyle(textFormatting));
                     } else {
-                        tooltip.add(text.copy().withStyle(JadeHelper.getFormattingStyle()));
+                        tooltip.add(text.copy().withStyle(textFormatting));
                     }
                 }
                 if (serverTag.contains(TagRefs.TAG_ITEM)) {

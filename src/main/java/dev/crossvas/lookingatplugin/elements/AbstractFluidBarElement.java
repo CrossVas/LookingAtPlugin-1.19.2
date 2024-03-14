@@ -3,7 +3,7 @@ package dev.crossvas.lookingatplugin.elements;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.crossvas.lookingatplugin.helpers.Formatter;
 import dev.crossvas.lookingatplugin.helpers.GuiHelper;
-import dev.crossvas.lookingatplugin.mods.jade.style.ColorStyle;
+import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;

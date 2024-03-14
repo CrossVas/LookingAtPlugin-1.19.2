@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public enum WrenchableInfoProvider implements IInfoProvider {
-    INSTANCE;
+    THIS;
 
     @Override
     public void addInfo(ILookingAtHelper helper, BlockEntity blockEntity, Player player) {
