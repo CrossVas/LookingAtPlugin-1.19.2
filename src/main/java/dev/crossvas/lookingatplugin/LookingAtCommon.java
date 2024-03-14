@@ -1,5 +1,6 @@
 package dev.crossvas.lookingatplugin;
 
+import dev.crossvas.lookingatplugin.info.AdjustableTransformerInfoProvider;
 import dev.crossvas.lookingatplugin.info.BaseMachineInfoProvider;
 import dev.crossvas.lookingatplugin.info.EUStorageInfoProvider;
 import dev.crossvas.lookingatplugin.info.WrenchableInfoProvider;
@@ -23,6 +24,7 @@ public class LookingAtCommon {
     static {
         INFO_PROVIDERS.add(EUStorageInfoProvider.INSTANCE);
         INFO_PROVIDERS.add(BaseMachineInfoProvider.INSTANCE);
+        INFO_PROVIDERS.add(AdjustableTransformerInfoProvider.INSTANCE);
 
         INFO_PROVIDERS.add(WrenchableInfoProvider.INSTANCE); // keep last
     }

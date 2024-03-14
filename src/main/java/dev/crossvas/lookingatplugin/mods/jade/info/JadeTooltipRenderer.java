@@ -64,15 +64,14 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                 if (serverTag.contains(TagRefs.TAG_ENERGY)) {
                     int current = serverTag.getInt(TagRefs.TAG_ENERGY);
                     int max = serverTag.getInt(TagRefs.TAG_MAX);
+                    Component label = Component.Serializer.fromJson(serverTag.getString("energyText"));
                     if (JadeHelper.forceTopStyle()) {
                         BoxStyle boxStyle = JadeHelper.getStyle(ColorStyle.RED);
                         IProgressStyle progressStyle = JadeHelper.getProgressStyle(ColorStyle.RED);
-                        Component text = Component.Serializer.fromJson(serverTag.getString("energyText"));
-                        tooltip.add(tooltip.getElementHelper().progress((float) current / max, text, progressStyle, boxStyle, true));
+                        tooltip.add(tooltip.getElementHelper().progress((float) current / max, label, progressStyle, boxStyle, true));
                     } else {
-                        Component text = Component.translatable("ic2.probe.eu.storage.full.name", current, max);
                         IProgressStyle progressStyle = tooltip.getElementHelper().progressStyle().color(-5636096, -10092544);
-                        tooltip.add(tooltip.getElementHelper().progress((float) current / max, text, progressStyle, BoxStyle.DEFAULT, true));
+                        tooltip.add(tooltip.getElementHelper().progress((float) current / max, label, progressStyle, BoxStyle.DEFAULT, true));
                     }
 
                 }

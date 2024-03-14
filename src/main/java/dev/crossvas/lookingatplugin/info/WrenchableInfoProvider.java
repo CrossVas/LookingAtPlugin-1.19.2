@@ -7,6 +7,7 @@ import ic2.core.block.base.features.IWrenchableTile;
 import ic2.core.inventory.filter.IFilter;
 import ic2.core.inventory.filter.SpecialFilters;
 import ic2.core.platform.registries.IC2Items;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -26,9 +27,9 @@ public enum WrenchableInfoProvider implements IInfoProvider {
                 if (actualRate > 0) {
                     if (handHeldStack.getItem() instanceof IWrenchTool tool) {
                         double dropChance = tool.getActualLoss(handHeldStack, wrenchableTile.getDropRate(player));
-                        helper.addItem(wrenchStack, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append("% ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info")), true);
+                        helper.addItem(wrenchStack, Component.literal(String.valueOf(Mth.floor(dropChance * 100.0))).append("% ").append(Component.translatable("ic2.probe.wrenchable.drop_chance.info").withStyle(ChatFormatting.GRAY)), true);
                     } else {
-                        helper.addItem(wrenchStack, Component.translatable("ic2.probe.wrenchable.info"), true);
+                        helper.addItem(wrenchStack, Component.translatable("ic2.probe.wrenchable.info").withStyle(ChatFormatting.GRAY), true);
                     }
                 }
             }

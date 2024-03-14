@@ -10,6 +10,7 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.NumberFormat;
 import mcjty.theoneprobe.api.TankReference;
 import mcjty.theoneprobe.apiimpl.elements.ElementProgress;
+import mcjty.theoneprobe.apiimpl.elements.ElementText;
 import mcjty.theoneprobe.apiimpl.styles.ItemStyle;
 import mcjty.theoneprobe.apiimpl.styles.TextStyle;
 import net.minecraft.ChatFormatting;
@@ -32,13 +33,13 @@ public class LookingAtTOPHelper implements ILookingAtHelper {
         if (removeHarvestInfo) {
             info.getElements().remove(harvestInfoElement); // harvest tool
         }
-        info.horizontal().item(stack, new ItemStyle().height(15).width(15)).text(text.copy(), new TextStyle().topPadding(4));
+        info.horizontal().item(stack, new ItemStyle().height(15).width(15)).element(new ElementText(text, new TextStyle().topPadding(4)));
         info.element(harvestInfoElement);
     }
 
     @Override
     public void addText(Component text, boolean append) {
-        info.text(text);
+        info.element(new ElementText(text, new TextStyle()));
     }
 
     @Override
