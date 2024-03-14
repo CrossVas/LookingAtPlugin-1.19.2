@@ -1,0 +1,27 @@
+{
+  "config.jade.plugin_lookingat.wrenchable_info": "Wrenchable Info",
+  "config.jade.plugin_lookingat.eu_storage_info": "EU Storage Info",
+  "config.jade.plugin_lookingat.eu_reader": "EU-Reader Info",
+  "config.jade.plugin_lookingat.thermometer": "Thermometer Info",
+  "config.jade.plugin_lookingat.crop": "Crop Analyzer Info",
+  "config.jade.plugin_lookingat.remove_renders_fluid": "Use custom style for IC2 Tanks",
+  "config.jade.plugin_lookingat.remove_modid": "Remove Mod Name",
+  "config.jade.plugin_lookingat.relocate_modid": "Relocate Mod Name",
+  "config.jade.plugin_lookingat.renderer": "Tooltip Renderer",
+  "config.jade.plugin_lookingat.force_top_style": "Force TOP Style",
+
+  "ic2.probe.wrenchable.drop_chance.info": "Drop Chance",
+  "ic2.probe.wrenchable.info": "Wrenchable Block",
+  "ic2.tube.round_robin.info": "Round Robin Rules",
+  "ic2.tube.directional.info": "Direction: %s",
+  "ic2.tube.filter.info": "Filter:",
+  "ic2.tube.meta_filter.info": "Meta Filter:",
+  "ic2.tube.extraction_filter_whitelist.info": "Whitelist:",
+  "ic2.tube.teleport.info": "Network ID: ",
+  "ic2.tube.pickup.info": "Large Radius: ",
+  "ic2.probe.pipe.transported": "Fluids:",
+
+  "ic2.barrel.info.fluid": "%s: %s/%s mB",
+  "ic2.probe.eu.storage.full.name": "Energy: %s/%s EU",
+  "ic2.probe.transformer.inverted": "Inverted: "
+}

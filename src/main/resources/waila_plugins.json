@@ -1,0 +1,7 @@
+{
+  "lookingat:plugin": {
+    "initializer": "dev.crossvas.lookingatplugin.mods.waila.LookingAtWailaPlugin",
+    "side": "*",
+    "required": ["ic2"]
+  }
+}
