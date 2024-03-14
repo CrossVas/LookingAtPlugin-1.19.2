@@ -20,9 +20,9 @@ public enum BaseEnergyStorageInfoProvider implements IInfoProvider {
     public void addInfo(ILookingAtHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseInventoryTileEntity tile) {
             if (tile instanceof BaseEnergyStorageTileEntity energyStorage) {
-                simpleText(helper, false, false, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier()));
-                simpleText(helper, false, false, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getTier()));
-                simpleText(helper, false, false, "ic2.probe.eu.output.name", energyStorage.getProvidedEnergy());
+                text(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(energyStorage.getSourceTier()));
+                text(helper, "ic2.probe.eu.max_in.name", EnergyNet.INSTANCE.getPowerFromTier(energyStorage.getTier()));
+                text(helper, "ic2.probe.eu.output.name", energyStorage.getProvidedEnergy());
 
                 EnergyContainer result = EnergyContainer.getContainer(energyStorage);
                 long averageIn = result.getAverageIn();

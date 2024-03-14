@@ -21,18 +21,18 @@ public enum BaseGeneratorInfoProvider implements IInfoProvider {
     public void addInfo(ILookingAtHelper helper, BlockEntity blockEntity, Player player) {
         if (blockEntity instanceof BaseGeneratorTileEntity gen) {
             float euProduction = gen.getEUProduction();
-            simpleText(helper, false, false, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
-            simpleText(helper, false, false, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) euProduction, 5));
+            text(helper, "ic2.probe.eu.tier.name", EnergyNet.INSTANCE.getDisplayTier(gen.getSourceTier()));
+            text(helper, "ic2.probe.eu.output.current.name", Formatter.formatNumber((double) euProduction, 5));
 
-            simpleText(helper, false, false, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
+            text(helper, "ic2.probe.eu.output.max.name", gen.getMaxEnergyOutput());
             if (gen instanceof SolarTurbineTileEntity solarTurbine) {
                 int heat = solarTurbine.getHeat();
-                simpleText(helper, false, false, "ic2.probe.heat.name", Formatter.THERMAL_GEN.format((double) ((float) heat / 240.0F)));
+                text(helper, "ic2.probe.heat.name", Formatter.THERMAL_GEN.format((double) ((float) heat / 240.0F)));
                 LookingAtCommon.addTankInfo(helper, solarTurbine);
             }
             if (gen instanceof ThermalGeneratorTileEntity thermal) {
                 float subProduction = thermal.subProduction.getProduction(2000.0F);
-                simpleText(helper, false, false, "ic2.probe.production.passive.name", Formatter.THERMAL_GEN.format((double) subProduction));
+                text(helper, "ic2.probe.production.passive.name", Formatter.THERMAL_GEN.format((double) subProduction));
                 LookingAtCommon.addTankInfo(helper, thermal);
             }
             if (gen instanceof GeoGenTileEntity geo) {

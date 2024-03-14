@@ -17,6 +17,10 @@ public interface IInfoProvider {
         return StackUtil.hasHotbarItems(player, getFilter());
     }
 
+    default void text(ILookingAtHelper helper, String text, Object... args) {
+        this.simpleText(helper, false, false, text, args);
+    }
+
     default void simpleText(ILookingAtHelper helper, boolean append, boolean centered, String text, Object... args) {
         helper.addTextElement(Component.translatable(text, args), ChatFormatting.WHITE, append, centered);
     }
