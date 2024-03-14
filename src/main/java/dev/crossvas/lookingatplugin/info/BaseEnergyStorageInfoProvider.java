@@ -30,6 +30,7 @@ public enum BaseEnergyStorageInfoProvider implements IInfoProvider {
                 long packetsIn = result.getPacketsIn();
                 long packetsOut = result.getPacketsOut();
                 if (averageIn > 0 || averageOut > 0) {
+                    helper.addPaddingElement(0, 3);
                     if (averageIn > 0) {
                         text(helper, ChatFormatting.AQUA, "tooltip.item.ic2.eu_reader.cable_flow_in", Formatters.EU_FORMAT.format((long) averageIn));
                     }

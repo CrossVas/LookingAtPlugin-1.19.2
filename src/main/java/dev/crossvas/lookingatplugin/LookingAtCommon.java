@@ -30,6 +30,7 @@ public class LookingAtCommon {
         INFO_PROVIDERS.add(BaseMultiblockMachineInfoProvider.THIS);
         INFO_PROVIDERS.add(BaseTeleporterInfoProvider.THIS);
         INFO_PROVIDERS.add(BatteryStationInfoProvider.THIS);
+        INFO_PROVIDERS.add(CableInfoProvider.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfoProvider.THIS); // keep last
     }
