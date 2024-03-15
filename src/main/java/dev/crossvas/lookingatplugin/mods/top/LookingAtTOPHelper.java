@@ -5,12 +5,15 @@ import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import dev.crossvas.lookingatplugin.helpers.Formatter;
 import dev.crossvas.lookingatplugin.helpers.GuiHelper;
 import dev.crossvas.lookingatplugin.mods.top.style.TOPBarStyles;
+import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IElement;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.TankReference;
+import mcjty.theoneprobe.apiimpl.elements.ElementPadding;
 import mcjty.theoneprobe.apiimpl.elements.ElementProgress;
 import mcjty.theoneprobe.apiimpl.elements.ElementText;
 import mcjty.theoneprobe.apiimpl.styles.ItemStyle;
+import mcjty.theoneprobe.apiimpl.styles.LayoutStyle;
 import mcjty.theoneprobe.apiimpl.styles.TextStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -39,7 +42,16 @@ public class LookingAtTOPHelper implements ILookingAtHelper {
     @Override
     public void addTextElement(Component text, ChatFormatting formatting, boolean append, boolean centered) {
         IElement textElement = new ElementText(text.copy().withStyle(formatting), new TextStyle());
-        info.element(textElement);
+        if (append) {
+            info.horizontal().element(info.getElements().get(info.getElements().size() - 1)).element(textElement);
+        } else {
+            if (centered) {
+                int center = (118 - textElement.getWidth()) / 2;
+                info.horizontal(new LayoutStyle().alignment(ElementAlignment.ALIGN_CENTER)).element(new ElementPadding(center, 0)).element(textElement).element(new ElementPadding(center, 0));
+            } else {
+                info.element(textElement);
+            }
+        }
     }
 
     @Override

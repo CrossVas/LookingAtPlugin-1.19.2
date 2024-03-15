@@ -66,9 +66,9 @@ public enum BarrelInfoProvider implements IInfoProvider {
                     helper.addFluidElement(waterStack, maxFluidCapacity);
 
                     centeredText(helper, ChatFormatting.YELLOW, "ic2.probe.barrel.status.brew.name");
-                    helper.addBarElement(brewQuality, 5, Component.translatable("ic2.probe.barrel.beer.quality." + brewQuality + ".name"), ColorStyle.BLUE.aColor);
-                    helper.addBarElement(alcoholLevel, 6, Component.translatable("ic2.probe.barrel.beer.alc." + alcoholLevel + ".name"), ColorStyle.GREEN.aColor);
-                    helper.addBarElement(solidRatio, 6, Component.translatable("ic2.probe.barrel.beer.solid." + solidRatio + ".name"), ColorStyle.YELLOW.aColor);
+                    text(helper, Component.translatable("ic2.probe.barrel.beer.quality." + brewQuality + ".name"));
+                    text(helper, Component.translatable("ic2.probe.barrel.beer.alc." + alcoholLevel + ".name"));
+                    text(helper, Component.translatable("ic2.probe.barrel.beer.solid." + solidRatio + ".name"));
                     helper.addBarElement(age, (int) maxValue, Component.literal(format.format(current) + "%"), ColorStyle.BLUE.aColor);
                     break;
                 case 2:
@@ -100,7 +100,7 @@ public enum BarrelInfoProvider implements IInfoProvider {
                     int brewedPotion = MobEffect.getId(barrelTile.potionType);
                     Component potionID = brewedPotion == -1 ? Component.translatable("tooltip.block.ic2.barrel.unknown") : barrelTile.potionType.getDisplayName();
                     text(helper, "ic2.probe.barrel.status.output.name", potionID);
-                    helper.addBarElement(brewQuality, 6, Component.translatable("ic2.probe.barrel.potion.quality." + brewQuality + ".name", brewQuality), ColorStyle.BLUE.aColor);
+                    text(helper, "ic2.probe.barrel.potion.quality." + brewQuality + ".name", brewQuality);
 
                     age = barrelTile.age;
                     maxValue = 5000.0 * Math.pow(3.0, brewQuality);

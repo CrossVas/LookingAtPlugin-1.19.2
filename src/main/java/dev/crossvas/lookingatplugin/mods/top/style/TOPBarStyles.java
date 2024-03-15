@@ -11,11 +11,11 @@ public class TOPBarStyles {
 
     public static IProgressStyle tank(int color, Component fluidName) {
         int width = Math.max(Minecraft.getInstance().font.width(fluidName.getString()) + 5, 118);
-        return IProgressStyleBuilder.bounds(width, 12).borderlessColor(color, color, ColorUtils.doubleDarker(color)).prefix(fluidName).numberFormat(NumberFormat.NONE);
+        return IProgressStyleBuilder.bounds(118, 12).borderlessColor(color, color, ColorUtils.doubleDarker(color)).prefix(fluidName).numberFormat(NumberFormat.NONE);
     }
 
     public static IProgressStyle bar(int color, Component label) {
         int width = Math.max(Minecraft.getInstance().font.width(label.getString()) + 5, 118);
-        return IProgressStyleBuilder.bounds(width, 12).borderlessColor(color, ColorUtils.darker(color), ColorUtils.doubleDarker(color)).prefix(label).numberFormat(NumberFormat.NONE);
+        return IProgressStyleBuilder.bounds(118, 12).borderlessColor(color, ColorUtils.darker(color), ColorUtils.doubleDarker(color)).prefix(label).numberFormat(NumberFormat.NONE);
     }
 }

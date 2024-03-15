@@ -8,6 +8,7 @@ import ic2.core.platform.registries.IC2Items;
 import mcjty.theoneprobe.api.*;
 import mcjty.theoneprobe.apiimpl.styles.ItemStyle;
 import mcjty.theoneprobe.apiimpl.styles.LayoutStyle;
+import mcjty.theoneprobe.apiimpl.styles.TextStyle;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -39,8 +40,11 @@ public class CropIconProvider implements IBlockDisplayOverride {
                     icon = !crop.getDisplayItem().isEmpty() ? crop.getDisplayItem() : new ItemStack(IC2Items.CROP_SEED);
                     discovered = crop.discoveredBy();
                 }
-                iProbeInfo.horizontal().item(icon, new ItemStyle().width(20)).vertical(new LayoutStyle().alignment(ElementAlignment.ALIGN_TOPLEFT)).text(name).text(CompoundText.create().text("§oby ").text(discovered).text("§r").style(TextStyleClass.INFO));
-                iProbeInfo.text(CompoundText.create().style(TextStyleClass.MODNAME).text(((ModContainer) ModList.get().getModContainerById(ForgeRegistries.BLOCKS.getKey(tile.getBlockState().getBlock()).getNamespace()).get()).getModInfo().getDisplayName()));
+                iProbeInfo.horizontal().item(icon, new ItemStyle().width(20))
+                        .vertical(new LayoutStyle().alignment(ElementAlignment.ALIGN_TOPLEFT))
+                        .text(name)
+                        .text(CompoundText.create().text("§o").text(Component.translatable("jei.ic2.reactor.by", discovered)).text("§r").style(TextStyleClass.INFO))
+                        .text(CompoundText.create().style(TextStyleClass.MODNAME).text(((ModContainer) ModList.get().getModContainerById(ForgeRegistries.BLOCKS.getKey(tile.getBlockState().getBlock()).getNamespace()).get()).getModInfo().getDisplayName()), new TextStyle().topPadding(5));
                 return true;
             }
         }

@@ -50,8 +50,6 @@ public enum CropInfoProvider implements IInfoProvider {
 
                 if (scanLevel < 1 && currentStage < maxStage && crop != ICropRegistry.WEED && crop != ICropRegistry.SEA_WEED) {
                     text(helper, "info.crop.ic2.data.unknown");
-                } else {
-//                    text(helper, "jei.ic2.reactor.by", crop.discoveredBy().getString());
                 }
                 if (scanLevel < 4 && currentStage < maxStage) {
                     helper.addBarElement(scanLevel, 4, Component.translatable("ic2.probe.crop.info.scan", scanLevel, 4), ColorStyle.GREEN.aColor);

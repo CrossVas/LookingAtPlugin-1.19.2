@@ -5,6 +5,7 @@ import dev.crossvas.lookingatplugin.TagRefs;
 import dev.crossvas.lookingatplugin.elements.AbstractItemStackElement;
 import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import dev.crossvas.lookingatplugin.helpers.Formatter;
+import dev.crossvas.lookingatplugin.mods.waila.WailaHelper;
 import dev.crossvas.lookingatplugin.mods.waila.elements.CustomBarComponent;
 import dev.crossvas.lookingatplugin.mods.waila.elements.WailaStackComponent;
 import mcp.mobius.waila.api.*;
@@ -23,6 +24,8 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.text.DecimalFormat;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityComponentProvider {
@@ -71,7 +74,7 @@ public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityCom
                     int current = serverTag.getInt(TagRefs.TAG_ENERGY);
                     int max = serverTag.getInt(TagRefs.TAG_MAX);
                     Component text = Component.Serializer.fromJson(serverTag.getString("energyText"));
-                    tooltip.addLine(new CustomBarComponent((float) current / max, ColorStyle.RED.aColor, text));
+                    tooltip.addLine(new PairComponent(new WrappedComponent(WailaHelper.getWailaComp(text)), new BarComponent((float) current / max, ColorStyle.RED.aColor, Component.literal(Formatter.formatInt(current, 4) + " / " + Formatter.formatInt(max, 4)).withStyle(ChatFormatting.WHITE))));
                     tooltip.addLine(new SpacingComponent(0, 1));
                 }
                 if (serverTag.contains(TagRefs.TAG_FLUID)) {
@@ -83,7 +86,10 @@ public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityCom
                         ResourceLocation stillTexture = IClientFluidTypeExtensions.of(fluid.getFluid()).getStillTexture(fluid);
                         TextureAtlasSprite liquidIcon = map.apply(stillTexture);
                         int color = IClientFluidTypeExtensions.of(fluid.getFluid()).getTintColor(fluid);
-                        tooltip.addLine(new PairComponent(new WrappedComponent(fluid.getDisplayName()), new SpriteBarComponent((float) fluid.getAmount() / max, liquidIcon, 16, 16, color, Component.literal(Formatter.formatNumber(fluid.getAmount(), String.valueOf(fluid.getAmount()).length() - 1) + " / " + Formatter.formatNumber(max, String.valueOf(max).length() - 1)))));
+                        tooltip.addLine(new PairComponent(
+                                new WrappedComponent(fluid.getDisplayName()),
+                                new SpriteBarComponent((float) fluid.getAmount() / max, liquidIcon, 16, 16, color,
+                                        Component.literal(Formatter.formatNumber(fluid.getAmount(), String.valueOf(fluid.getAmount()).length() - 1) + " / " + Formatter.formatNumber(max, String.valueOf(max).length() - 1)).withStyle(ChatFormatting.WHITE))));
                     }
                 }
 
@@ -92,7 +98,17 @@ public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityCom
                     int current = serverTag.getInt(TagRefs.TAG_BAR);
                     int max = serverTag.getInt(TagRefs.TAG_MAX);
                     Component label = Component.Serializer.fromJson(serverTag.getString("barText"));
-                    tooltip.addLine(new CustomBarComponent((float) current / max, color, label));
+                    Component newLabel = WailaHelper.getWailaComp(label);
+                    Component args = Component.literal(Formatter.formatInt(current, 4) + " / " + Formatter.formatInt(max, 4)).withStyle(ChatFormatting.WHITE);
+                    if (Objects.equals(newLabel, Component.empty())) {
+                        args = label.copy().withStyle(ChatFormatting.WHITE);
+                        tooltip.addLine(new CustomBarComponent((float) current / max, color, args));
+                    } else if (WailaHelper.SPEED_COMP.contains(label)) {
+                        args = Component.literal(new DecimalFormat().format(((float) current / max) * 100.0) + "%").withStyle(ChatFormatting.WHITE);
+                        tooltip.addLine(new PairComponent(new WrappedComponent(WailaHelper.getWailaComp(label)), new BarComponent((float) current / max, color, args)));
+                    } else {
+                        tooltip.addLine(new PairComponent(new WrappedComponent(WailaHelper.getWailaComp(label)), new BarComponent((float) current / max, color, args)));
+                    }
                     tooltip.addLine(new SpacingComponent(0, 1));
                 }
                 if (serverTag.contains(TagRefs.TAG_PADDING)) {
