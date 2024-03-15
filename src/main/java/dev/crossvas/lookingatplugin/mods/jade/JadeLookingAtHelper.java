@@ -14,7 +14,6 @@ import java.util.List;
 public class JadeLookingAtHelper implements ILookingAtHelper {
 
     private final ListTag data = new ListTag();
-    private final CompoundTag stacksTag = new CompoundTag();
 
     @Override
     public void addItemElement(ItemStack stack, Component text, boolean removeHarvestInfo) {
@@ -84,17 +83,18 @@ public class JadeLookingAtHelper implements ILookingAtHelper {
     @Override
     public void addFluidGridElement(List<FluidStack> fluids, Component component, ChatFormatting formatting) {
         ListTag fluidList = new ListTag();
+        CompoundTag stackListTag = new CompoundTag();
         for (FluidStack stack : fluids) {
             CompoundTag stackTag = new CompoundTag();
             stackTag.put("fluid", stack.writeToNBT(new CompoundTag()));
             fluidList.add(stackTag);
         }
         if (!fluidList.isEmpty()) {
-            stacksTag.put(TagRefs.TAG_INVENTORY_FLUID, fluidList);
+            stackListTag.put(TagRefs.TAG_INVENTORY_FLUID, fluidList);
         }
-        stacksTag.putString("fluidsText", Component.Serializer.toJson(component));
-        stacksTag.putInt("fluidsTextFormat", formatting.getId());
-        data.add(stacksTag);
+        stackListTag.putString("fluidsText", Component.Serializer.toJson(component));
+        stackListTag.putInt("fluidsTextFormat", formatting.getId());
+        data.add(stackListTag);
     }
 
     @Override
