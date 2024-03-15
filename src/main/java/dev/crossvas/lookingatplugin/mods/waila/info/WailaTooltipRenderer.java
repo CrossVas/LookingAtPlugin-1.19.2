@@ -8,6 +8,7 @@ import dev.crossvas.lookingatplugin.helpers.Formatter;
 import dev.crossvas.lookingatplugin.mods.waila.WailaHelper;
 import dev.crossvas.lookingatplugin.mods.waila.elements.CustomBarComponent;
 import dev.crossvas.lookingatplugin.mods.waila.elements.WailaStackComponent;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import mcp.mobius.waila.api.*;
 import mcp.mobius.waila.api.component.*;
 import net.minecraft.ChatFormatting;
@@ -25,6 +26,7 @@ import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -115,6 +117,36 @@ public class WailaTooltipRenderer implements IBlockComponentProvider, IEntityCom
                     int paddingX = serverTag.getInt(TagRefs.TAG_PADDING);
                     int paddingY = serverTag.getInt(TagRefs.TAG_PADDING_Y);
                     tooltip.addLine(new SpacingComponent(paddingX, paddingY));
+                }
+                if (serverTag.contains(TagRefs.TAG_INVENTORY)) {
+                    Component label = Component.Serializer.fromJson(serverTag.getString("stacksText"));
+                    ChatFormatting formatting = ChatFormatting.getById(serverTag.getInt("stackTextFormat"));
+                    ListTag stackListTag = serverTag.getList(TagRefs.TAG_INVENTORY, Tag.TAG_COMPOUND);
+                    List<ItemStack> stackList = new ObjectArrayList<>();
+                    stackListTag.forEach(tag -> {
+                        CompoundTag stackTag = (CompoundTag) tag;
+                        ItemStack stack = ItemStack.of(stackTag.getCompound("stack"));
+                        stack.setCount(stackTag.getInt("count"));
+                        stackList.add(stack);
+                    });
+
+                    int counter = 0;
+                    if (!stackList.isEmpty()) {
+                        tooltip.addLine(new SpacingComponent(0, 5));
+                        tooltip.addLine(label.copy().withStyle(formatting));
+                        tooltip.addLine(new SpacingComponent(0, 2));
+                        for (ItemStack stack : stackList) {
+                            if (counter < 7) {
+                                tooltip.getLine(tooltip.getLineCount() - 1).with(new ItemComponent(stack));
+                                counter++;
+                                if (counter == 6) {
+                                    counter = 0;
+                                    tooltip.addLine(new SpacingComponent(0, 0));
+                                }
+                            }
+                        }
+                        tooltip.addLine(new SpacingComponent(0, 2));
+                    }
                 }
             }
         }

@@ -9,9 +9,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.List;
+
 public class WailaLookingAtHelper implements ILookingAtHelper {
 
     private final ListTag data = new ListTag();
+    private final CompoundTag stacksTag = new CompoundTag();
 
     @Override
     public void addItemElement(ItemStack stack, Component text, boolean removeHarvestInfo) {
@@ -20,6 +23,24 @@ public class WailaLookingAtHelper implements ILookingAtHelper {
         stackTag.putString("stackText", Component.Serializer.toJson(text));
         stackData.put(TagRefs.TAG_ITEM, stackTag);
         data.add(stackData);
+    }
+
+    @Override
+    public void addItemGridElement(List<ItemStack> stacks, Component component, ChatFormatting formatting) {
+        ListTag stackList = new ListTag();
+        for (ItemStack stack : stacks) {
+            CompoundTag stackTag = new CompoundTag();
+            stackTag.put("stack", stack.save(new CompoundTag()));
+            stackTag.putInt("count", stack.getCount());
+            stackList.add(stackTag);
+        }
+        if (!stackList.isEmpty()) {
+            stacksTag.put(TagRefs.TAG_INVENTORY, stackList);
+
+        }
+        stacksTag.putString("stacksText", Component.Serializer.toJson(component));
+        stacksTag.putInt("stackTextFormat", formatting.getId());
+        data.add(stacksTag);
     }
 
     @Override
@@ -58,6 +79,22 @@ public class WailaLookingAtHelper implements ILookingAtHelper {
         fluidData.putInt(TagRefs.TAG_MAX, maxCapacity);
 //        fluidData.putString(TagRefs.TAG_TEXT, Component.Serializer.toJson(text));
         data.add(fluidData);
+    }
+
+    @Override
+    public void addFluidGridElement(List<FluidStack> fluids, Component component, ChatFormatting formatting) {
+        ListTag fluidList = new ListTag();
+        for (FluidStack stack : fluids) {
+            CompoundTag stackTag = new CompoundTag();
+            stackTag.put("fluid", stack.writeToNBT(new CompoundTag()));
+            fluidList.add(stackTag);
+        }
+        if (!fluidList.isEmpty()) {
+            stacksTag.put(TagRefs.TAG_INVENTORY_FLUID, fluidList);
+        }
+        stacksTag.putString("fluidsText", Component.Serializer.toJson(component));
+        stacksTag.putInt("fluidsTextFormat", formatting.getId());
+        data.add(stacksTag);
     }
 
     @Override

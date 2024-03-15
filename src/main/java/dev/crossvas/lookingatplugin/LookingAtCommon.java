@@ -34,6 +34,7 @@ public class LookingAtCommon {
         INFO_PROVIDERS.add(ChargePadInfoProvider.THIS);
         INFO_PROVIDERS.add(ChargingBenchInfoProvider.THIS);
         INFO_PROVIDERS.add(CropInfoProvider.THIS);
+        INFO_PROVIDERS.add(CropLibraryInfoProvider.THIS);
 
         INFO_PROVIDERS.add(WrenchableInfoProvider.THIS); // keep last
     }

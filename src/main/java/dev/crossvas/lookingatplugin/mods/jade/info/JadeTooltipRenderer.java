@@ -9,6 +9,7 @@ import dev.crossvas.lookingatplugin.mods.jade.JadeRefs;
 import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import dev.crossvas.lookingatplugin.mods.jade.elements.SpecialTextElement;
 import ic2.core.utils.math.ColorUtils;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -23,6 +24,8 @@ import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.*;
 import snownee.jade.impl.ui.ProgressStyle;
+
+import java.util.List;
 
 
 public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComponentProvider {
@@ -125,6 +128,36 @@ public class JadeTooltipRenderer implements IBlockComponentProvider, IEntityComp
                     int paddingX = serverTag.getInt(TagRefs.TAG_PADDING);
                     int paddingY = serverTag.getInt(TagRefs.TAG_PADDING_Y);
                     tooltip.add(helper.spacer(paddingX, paddingY));
+                }
+                if (serverTag.contains(TagRefs.TAG_INVENTORY)) {
+                    Component label = Component.Serializer.fromJson(serverTag.getString("stacksText"));
+                    ChatFormatting formatting = ChatFormatting.getById(serverTag.getInt("stackTextFormat"));
+                    ListTag stackListTag = serverTag.getList(TagRefs.TAG_INVENTORY, Tag.TAG_COMPOUND);
+                    List<ItemStack> stackList = new ObjectArrayList<>();
+                    stackListTag.forEach(tag -> {
+                        CompoundTag stackTag = (CompoundTag) tag;
+                        ItemStack stack = ItemStack.of(stackTag.getCompound("stack"));
+                        stack.setCount(stackTag.getInt("count"));
+                        stackList.add(stack);
+                    });
+
+                    int counter = 0;
+                    if (!stackList.isEmpty()) {
+                        tooltip.add(helper.spacer(0, 5));
+                        tooltip.add(label.copy().withStyle(formatting));
+                        tooltip.add(helper.spacer(0, 2));
+                        for (ItemStack stack : stackList) {
+                            if (counter < 7) {
+                                tooltip.append(helper.item(stack));
+                                counter++;
+                                if (counter == 6) {
+                                    counter = 0;
+                                    tooltip.add(helper.spacer(0, 0));
+                                }
+                            }
+                        }
+                        tooltip.add(helper.spacer(0, 2));
+                    }
                 }
             }
         }

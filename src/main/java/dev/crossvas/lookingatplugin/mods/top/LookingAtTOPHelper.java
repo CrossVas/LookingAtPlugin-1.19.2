@@ -5,6 +5,8 @@ import dev.crossvas.lookingatplugin.helpers.ColorStyle;
 import dev.crossvas.lookingatplugin.helpers.Formatter;
 import dev.crossvas.lookingatplugin.helpers.GuiHelper;
 import dev.crossvas.lookingatplugin.mods.top.style.TOPBarStyles;
+import ic2.probeplugin.override.components.GridElement;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IElement;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -20,6 +22,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.List;
 
 public class LookingAtTOPHelper implements ILookingAtHelper {
 
@@ -37,6 +41,13 @@ public class LookingAtTOPHelper implements ILookingAtHelper {
         }
         info.horizontal().item(stack, new ItemStyle().width(15)).element(new ElementText(text, new TextStyle().topPadding(5)));
         info.element(harvestInfoElement);
+    }
+
+    @Override
+    public void addItemGridElement(List<ItemStack> stacks, Component component, ChatFormatting formatting) {
+        if (!stacks.isEmpty()) {
+            info.element(new GridElement(Object2ObjectMaps.singleton(component.copy().withStyle(formatting), stacks)));
+        }
     }
 
     @Override
@@ -68,6 +79,11 @@ public class LookingAtTOPHelper implements ILookingAtHelper {
     public void addFluidElement(FluidStack fluid, int maxCapacity) {
         Component fluidComp = Component.translatable("ic2.barrel.info.fluid", fluid.getDisplayName(), Formatter.formatNumber(fluid.getAmount(), String.valueOf(fluid.getAmount()).length() - 1), Formatter.formatNumber(maxCapacity, String.valueOf(maxCapacity).length() - 1)).withStyle(ChatFormatting.WHITE);
         info.tank(new TankReference(maxCapacity, fluid.getAmount(), fluid), TOPBarStyles.tank(GuiHelper.getColorForFluid(fluid), fluidComp));
+    }
+
+    @Override
+    public void addFluidGridElement(List<FluidStack> fluids, Component component, ChatFormatting formatting) {
+
     }
 
     @Override
